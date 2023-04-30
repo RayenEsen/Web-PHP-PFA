@@ -97,7 +97,7 @@
                   <i class="ni education_hat mr-2"></i>University of Esen Manouba
                 </div>
                 <hr class="my-4">
-                <p></p>
+                <p><?php echo $_GET['ABOUT'] ?></p>
               </div>
             </div>
           </div>

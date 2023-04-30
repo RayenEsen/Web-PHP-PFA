@@ -166,14 +166,14 @@ require_once '../Controller/UserController.php';
 foreach ($messages as $message) {
     $id = $message['sender'];
     $name = $userModel->getName($id); 
-    if ($message['sender'] == $_SESSION['user_id']) {
+    if ($id == $_SESSION['user_id']) {
 ?>
         <li class="chat-right">
             <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
             <div class="chat-text"><?= $message['message'] ?></div>
             <div class="chat-avatar">
                 <img src="images/User.png" alt="Retail Admin">
-                <div class="chat-name"><?= $_SESSION['user_name'] ?></div>
+                <div class="chat-name">You</div>
             </div>
         </li>
 <?php
@@ -183,7 +183,7 @@ foreach ($messages as $message) {
         <li class="chat-left">
             <div class="chat-avatar">
                 <img src="images/User.png" alt="Retail Admin">
-                <div class="chat-name"><?= $name['FIRST'] ?></div> <!-- use the $name variable here -->
+                <div class="chat-name"><?php echo $name['FIRST'] ?></div>
             </div>
             <div class="chat-text"><?= $message['message'] ?></div>
             <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
