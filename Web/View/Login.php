@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>Esen_Chat</title>
+    <title>Sign in</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/Login2.css">

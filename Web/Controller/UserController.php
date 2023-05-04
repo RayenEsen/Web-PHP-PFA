@@ -36,16 +36,24 @@ if (isset($_POST['edit'])) {
   $BIRTHDAY = $_POST['birthdate'];
   $ABOUT = $_POST['about'];
   $STATUS = $_POST['status'];
-  $userModel->Edit_profile($FIRST,$EMAIL,$POSITION,$GENDER,$ID,$PHONE,$BIRTHDAY,$ABOUT,$STATUS);
+  
+  // Check if an image was uploaded
+  if(isset($_FILES['imageUpload']) && $_FILES['imageUpload']['error'] == 0) {
+    // Get the content of the image and convert it to binary format
+    $imgContent = file_get_contents($_FILES['imageUpload']['tmp_name']);
+    // Call the Edit_profile function with the image content
+    $userModel->Edit_profile($FIRST, $EMAIL, $POSITION, $GENDER, $ID, $PHONE, $BIRTHDAY, $ABOUT, $STATUS, $imgContent);
   }
+  else {
+    // Call the Edit_profile function without the image content
+    $userModel->Edit_profile($FIRST, $EMAIL, $POSITION, $GENDER, $ID, $PHONE, $BIRTHDAY, $ABOUT, $STATUS);
+  }
+}
 
 if (isset($_POST['search']) || isset($_POST['search2']) || isset($_POST['search3']) || isset($_POST['search4']))
 {
   $FIRST = $_POST['FIRST'];
-
-  if (!empty($FIRST)) {
-    $userModel->View_profile($FIRST);
-  }
+  header('Location: http://localhost/web/View/Profil_show.php?FIRST=' . urlencode($FIRST));
 }
 
 if (isset($_POST['send']))

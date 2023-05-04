@@ -3,12 +3,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Esen_Chat</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="css/Profil.css">
   </head>
 <body>
   <?php
     session_start();
+    require_once "../Controller/UserController.php";
+    $user = $userModel->getUserBy_Id_Name($_SESSION['user_id'],$_SESSION['user_name']); 
   ?>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark"  id="navbar-main">
@@ -30,7 +32,22 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="images/User.png" width="200" height="40">
+                <?php
+                if (isset($user['PFP']))
+                {
+                  // If the user has a profile picture
+                ?>
+                <img alt="Default profile picture" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" width="200" height="40"> 
+                <?php
+                }
+                else
+                {
+                  // If the user doesn't have a profile picture, display the default image
+                  ?>
+                  <img alt="Default profile picture" src="../View/images/User.png" width="200" height="40">
+                  <?php
+                }
+                ?>
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['user_name'] ?></span>
@@ -60,8 +77,23 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="#">
-                <img id="user-image" src="images/User.png" class="rounded-circle" width="200" height="200">
-                
+                  <?php
+                if (isset($user['PFP']))
+                {
+                  // If the user has a profile picture
+                ?>
+                  <img id="user-image" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" class="rounded-circle" width="200" height="200">   
+                <?php
+                }
+                else
+                {
+                  // If the user doesn't have a profile picture, display the default image
+                  ?>
+                  <img id="user-image" src="../View/images/User.png" class="rounded-circle" width="200" height="200">   
+
+                  <?php
+                }
+                ?>
                 <br>
                 <br>
                 <br>
@@ -80,32 +112,15 @@
                   }
                 </style>
                 <br>
+                <form method="post" action="/Web/Controller/UserController.php" enctype="multipart/form-data">
                 <div class="custom-file" style="float: right;">
-                  <input type="file" class="btn btn-info" id="imageUpload" aria-describedby="inputGroupFileAddon" onchange="readURL(this)">
-                  <label class="btn btn-info" for="imageUpload">Choose file</label>
+                    <input type="file" class="btn btn-info" id="imageUpload" name="imageUpload" aria-describedby="inputGroupFileAddon">
+                    <label class="btn btn-info" for="imageUpload">Choose file</label>
                 </div>
               </a>
             </div>
           </div>
         </div>
-
-        <script>
-        if (sessionStorage.getItem('user_image')) {
-          document.querySelectorAll('#user-image, img[alt="Image placeholder"]').forEach(img => img.src = sessionStorage.getItem('user_image'));
-        }
-
-        function readURL(input) {
-          if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = e => {
-              sessionStorage.setItem('user_image', e.target.result);
-              document.querySelectorAll('#user-image, img[alt="Image placeholder"]').forEach(img => img.src = e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-          }
-        }
-
-        </script>
             <div class="card-body pt-0 pt-md-4">
               <div class="text-center">
 
@@ -131,7 +146,6 @@
               </div>
             </div>
             <div class="card-body">
-              <form method="post" action="/Web/Controller/UserController.php">
                 <div style="margin-left: 90%; margin-top :-8%">
                 <style>
                 select {

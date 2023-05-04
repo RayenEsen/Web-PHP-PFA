@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="css/Profil.css">
   </head>
 <body>
-
+<?php
+require_once '../Controller/UserController.php';
+$FIRST = $_GET['FIRST'];
+$user = $userModel->getUserBy_Id_Name(null,$FIRST);
+?>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark"  id="navbar-main">
       <div class="container-fluid">
@@ -29,10 +33,10 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="images/User.png" width="200" height="40">
+                    <img alt="Image placeholder" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" width="200" height="40">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php echo $_GET['FIRST']; ?></span>
+                  <span class="mb-0 text-sm  font-weight-bold"></span>
                 </div>
               </div>
             </a>
@@ -48,8 +52,8 @@
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-          <h1 class="display-2 text-white">Hello <?php echo $_GET['FIRST']; ?></h1>
-            <p class="text-white mt-0 mb-5">Personalize your profile page to match your preferences and reflect your unique style This will allow you to Professionally Represent yourself.</p>
+          <h1 class="display-2 text-white"><?php echo $user['FIRST']; ?></h1>
+            <p class="text-white mt-0 mb-5"></p>
           </div>
         </div>
       </div>
@@ -63,7 +67,7 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="#">
-                <img id="user-image" src="images/User.png" class="rounded-circle" width="200" height="200">
+                <img id="user-image" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" class="rounded-circle" width="200" height="200">
                 <br>
                 <br>
                 <br>
@@ -91,13 +95,13 @@
               <div class="text-center">
 
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Student - <?php echo $_GET['FIRST']; ?>
+                  <i class="ni business_briefcase-24 mr-2"></i>Student - <?php echo $user['FIRST']; ?>
                 </div>
                 <div>
                   <i class="ni education_hat mr-2"></i>University of Esen Manouba
                 </div>
                 <hr class="my-4">
-                <p><?php echo $_GET['ABOUT'] ?></p>
+                <p><?php echo $user['ABOUT'] ?></p>
               </div>
             </div>
           </div>
@@ -119,13 +123,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" readonly name ="username" placeholder="Username" value="<?php echo $_GET['FIRST'] ?>">
+                        <input type="text" id="input-username" class="form-control form-control-alternative" readonly name ="username" placeholder="Username" value="<?php echo $user['FIRST'] ?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="email" value="" class="form-control form-control-alternative" readonly name="email" placeholder="<?php echo $EMAIL = $_GET['EMAIL']; ?>">
+                        <input type="email" id="email" value="" class="form-control form-control-alternative" readonly name="email" placeholder="<?php echo $user['EMAIL']; ?>">
                       </div>
                     </div>
                   </div>
@@ -133,13 +137,13 @@
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-first-name">Position</label>
-                        <input name="position" type="text" id="input-first-name" readonly class="form-control form-control-alternative" placeholder="Student" value="<?php echo $_GET['POSITION'] ?>">
+                        <input name="position" type="text" id="input-first-name" readonly class="form-control form-control-alternative" placeholder="Student" value="<?php echo $user['POSITION'] ?>">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-last-name">Gender</label>
-                        <input name="gender" type="text" id="input-last-name" readonly class="form-control form-control-alternative" placeholder="Gender" value="<?php echo $_GET['GENDER'] ?>">
+                        <input name="gender" type="text" id="input-last-name" readonly class="form-control form-control-alternative" placeholder="Gender" value="<?php echo $user['GENDER'] ?>">
                       </div>
                     </div>
                   </div>
@@ -151,7 +155,7 @@
                     <div class="col-md-12">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-address">Phone Number</label>
-                        <input name="phone" id="input-address" readonly class="form-control form-control-alternative" placeholder="Phone" value="<?php echo $_GET['PHONE'] ?>" type="text">
+                        <input name="phone" id="input-address" readonly class="form-control form-control-alternative" placeholder="Phone" value="<?php echo $user['PHONE'] ?>" type="text">
                       </div>
                     </div>
                   </div>
@@ -159,7 +163,7 @@
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-city">Birthdate</label>
-                        <input name="birthdate" type="text" readonly id="input-city" class="form-control form-control-alternative" placeholder="Birthdate" value="<?php echo $_GET['BIRTHDAY'] ?>">
+                        <input name="birthdate" type="text" readonly id="input-city" class="form-control form-control-alternative" placeholder="Birthdate" value="<?php echo $user['BIRTHDAY'] ?>">
                       </div>
                     </div>
                     <div class="col-lg-4">
@@ -173,7 +177,7 @@
                 <hr class="my-4">
                 <!-- Description -->
                 <h6 class="heading-small text-muted mb-4">About me</h6>
-                <textarea name="about" rows="4" class="form-control form-control-alternative" readonly placeholder="A few words about you ..."><?php echo $_GET['ABOUT'] ?></textarea>
+                <textarea name="about" rows="4" class="form-control form-control-alternative" readonly placeholder="A few words about you ..."><?php echo $user['ABOUT'] ?></textarea>
               </form>
             </div>
           </div>

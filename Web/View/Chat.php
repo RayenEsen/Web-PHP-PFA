@@ -59,7 +59,7 @@
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="http://localhost/web/View/index.php">Home</a>
+              <a href="../View/index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
                   <a class="nav-link" href="../View/Profil.php">
                       <span>Profil</span>
@@ -103,7 +103,7 @@
 <div class="content-wrapper">
 
 <div class="row gutters">
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom: 30px;">
 <div class="card m-0">
 
 <div class="row no-gutters">
@@ -129,7 +129,22 @@
     ?>
     <li class="person" onclick="submitForm('<?php echo $user['FIRST']; ?>')">
       <div class="user">
-        <img src="images/User.png" alt="Retail Admin">
+      <?php
+      if (isset($user['PFP']))
+      {
+      // If the user has a profile picture
+      ?>
+      <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
+      <?php
+      }
+      else
+      {
+      // If the user doesn't have a profile picture, display the default image
+      ?>
+      <img src="../View/images/User.png" alt="User Image">
+      <?php
+      }
+      ?>
         <span class="status <?php echo $user['STATUS']; ?>"></span>
       </div>
       <p class="name-time">
@@ -165,14 +180,29 @@ function submitForm(id) {
 require_once '../Controller/UserController.php';
 foreach ($messages as $message) {
     $id = $message['sender'];
-    $name = $userModel->getName($id); 
+    $user = $userModel->getUserBy_Id_Name($id,null); 
     if ($id == $_SESSION['user_id']) {
 ?>
         <li class="chat-right">
             <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
             <div class="chat-text"><?= $message['message'] ?></div>
             <div class="chat-avatar">
-                <img src="images/User.png" alt="Retail Admin">
+                <?php
+                if (isset($user['PFP']))
+                {
+                  // If the user has a profile picture
+                ?>
+               <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
+                <?php
+                }
+                else
+                {
+                  // If the user doesn't have a profile picture, display the default image
+                  ?>
+                  <img src="../View/images/User.png" alt="User Image">
+                  <?php
+                }
+                ?>
                 <div class="chat-name">You</div>
             </div>
         </li>
@@ -182,8 +212,8 @@ foreach ($messages as $message) {
 ?>
         <li class="chat-left">
             <div class="chat-avatar">
-                <img src="images/User.png" alt="Retail Admin">
-                <div class="chat-name"><?php echo $name['FIRST'] ?></div>
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
+                <div class="chat-name"><?php echo $user['FIRST'] ?></div>
             </div>
             <div class="chat-text"><?= $message['message'] ?></div>
             <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>

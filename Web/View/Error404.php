@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 
 
-<title>error 404 page example with search input - Bootdey.com</title>
+<title>Error 404</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=kwf5HfWUqvaIEAWmiM70yqIFnRh4gUzDUx7lbl3JoRYMPEvgZRkDsspjSIqFsbPm2KSwj9sSRLwo1P_zBwzqYD_vIjoYQHs3Gn1y4c0pM6Y" charset="UTF-8"></script><style type="text/css">
@@ -79,7 +79,7 @@
 
 <div class="error-inner">
 <h1>404<span>Oop's sorry we can't find that page!</span></h1>
-<p>User not found or another type of Error</p>
+<p><?php echo $_GET['error'] ?></p>
 
 </div>
 

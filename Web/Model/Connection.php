@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'pfe';
+$dbname = 'pfa';
 $user = 'root';
 $password = '';
 

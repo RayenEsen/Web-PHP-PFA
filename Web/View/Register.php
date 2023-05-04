@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>Esen_Chat</title>
+    <title>Register</title>
     <!-- Calling css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link href="css/style.css" rel="stylesheet" />

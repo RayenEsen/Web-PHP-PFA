@@ -82,6 +82,9 @@
 <?php
   $users = $userModel->getUsers();
   foreach ($users as $user) {
+    if ($user['POSITION'] != "Teatcher")
+    {
+
 ?>
 <div class="col-xl-3 col-sm-6">
   <div class="card">
@@ -97,7 +100,24 @@
       </div>
       <div>
         <div class="d-flex align-items-center">
-          <div><img src="images/User.png" alt="" class="avatar-md rounded-circle img-thumbnail" /></div>
+          <div>      
+          <?php
+          if (isset($user['PFP']))
+          {
+          // If the user has a profile picture
+          ?>
+          <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>"  alt="User Image" class="avatar-md rounded-circle img-thumbnail" />
+          <?php
+          }
+          else
+          {
+          // If the user doesn't have a profile picture, display the default image
+          ?>
+          <img src="../View/images/User.png"  alt="User Image" class="avatar-md rounded-circle img-thumbnail" >
+          <?php
+          }
+          ?>
+          </div>
           <div class="flex-1 ms-3">
             <h5 class="font-size-16 mb-1"><a href="#" class="text-dark"><?php echo $user['FIRST']; ?></a></h5>
             <span class="badge badge-soft-success mb-0"><?php echo $user['POSITION']; ?></span>
@@ -123,6 +143,7 @@
 </div>
 <?php
   }
+}
 ?>
 
 </div>
