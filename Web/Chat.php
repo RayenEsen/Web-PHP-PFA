@@ -15,13 +15,14 @@
 </head>
 <body>
 <?php
-    session_start()
+    session_start();
+    require_once 'UserController.php';
 ?>
 <div class="hero_area">
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+          <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -38,11 +39,11 @@
                 <ul class="navbar-nav  mr-5">
                 <li class="nav-item mr-5">
                   <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Profil.php">
+                    <a class="nav-link" href="Profil.php">
                   <span>Profil</span>
                   </a>
                   <?php } else { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                    <a class="nav-link" href="Login.php">
                   <span>Login</span>
                   </a>
                   <?php } ?>
@@ -59,25 +60,25 @@
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="../View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                  <?php if ($verif==true) { ?>
+                     <a class="nav-link" href="Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="../View/Forum_list.php">
+                      <a class="nav-link" href="Forum.php">
                           <span>Forum Page</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href="Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -110,7 +111,7 @@
 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
 <div class="users-container">
 <div class="chat-search-box">
-<form action="../Controller/UserController.php" method="post">
+<form action="UserController.php" method="post">
   <div class="input-group">
     <input class="form-control" type="text" placeholder="Search" name="FIRST">
     <div class="input-group-btn">
@@ -123,7 +124,7 @@
 </div>
 <ul class="users">
   <?php
-  require_once '../Controller/UserController.php';
+  require_once 'UserController.php';
   $users = $userModel->getUsers();
   foreach ($users as $user) {
     ?>
@@ -141,7 +142,7 @@
       {
       // If the user doesn't have a profile picture, display the default image
       ?>
-      <img src="../View/images/User.png" alt="User Image">
+      <img src="images/User.png" alt="User Image">
       <?php
       }
       ?>
@@ -151,7 +152,7 @@
         <span class="name"><?php echo $user['FIRST']; ?></span>
         <span class="time"><?php echo $user['POSITION']; ?></span>
       </p>
-      <form id="profileForm_<?php echo $user['FIRST']; ?>" action="../Controller/UserController.php" method="post">
+      <form id="profileForm_<?php echo $user['FIRST']; ?>" action="UserController.php" method="post">
         <input type="hidden" name="FIRST" value="<?php echo $user['FIRST']; ?>">
         <input type="hidden" name="search3">
       </form>
@@ -178,7 +179,7 @@ function submitForm(id) {
     <div class="chat-box chatContainerScroll">
       <ul class="chat-list">
         <?php
-        require_once '../Controller/UserController.php';
+        require_once 'UserController.php';
         foreach ($messages as $message) {
           $id = $message['sender'];
           $user = $userModel->getUserBy_Id_Name($id, null);
@@ -197,7 +198,7 @@ function submitForm(id) {
                 } else {
                   // If the user doesn't have a profile picture, display the default image
                 ?>
-                  <img src="../View/images/User.png" alt="User Image">
+                  <img src="images/User.png" alt="User Image">
                 <?php
                 }
                 ?>
@@ -222,7 +223,7 @@ function submitForm(id) {
         ?>
       </ul>
     </div>
-    <form action="../Controller/UserController.php" method="post">
+    <form action="UserController.php" method="post">
       <div class="form-group mt-3 mb-0">
         <textarea class="form-control" rows="3" name="message" placeholder="Type your message here..."></textarea>
       </div>

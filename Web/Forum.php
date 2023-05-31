@@ -216,7 +216,7 @@ a.forum-item-title:hover {
 </head>
 <body>
 <?php 
-require_once "../Controller/UserController.php";
+require_once "UserController.php";
 
 // Define the categories
 $categories = ['staff', 'new', 'intro', 'general', 'education', 'gaming', 'clubs', 'help'];
@@ -272,7 +272,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+          <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -289,11 +289,11 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
                 <ul class="navbar-nav  mr-5">
                 <li class="nav-item mr-5">
                   <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Profil.php">
+                    <a class="nav-link" href="index.php">
                   <span>Profil</span>
                   </a>
                   <?php } else { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                    <a class="nav-link" href="Login.php">
                   <span>Login</span>
                   </a>
                   <?php } ?>
@@ -310,25 +310,25 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="../View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                  <?php if ($verif==true) { ?>
+                      <a class="nav-link" href="Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="../View/Forum.php">
+                      <a class="nav-link" href="Forum.php">
                           <span>Forum Page</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href="Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -366,7 +366,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-shield"></i>
 </div>
-<a href="../View/Forum_list.php?category=general" class="forum-item-title">General Discussion</a>
+<a href="Forum_list.php?category=general" class="forum-item-title">General Discussion</a>
 <div class="forum-sub-title">Talk about sports, entertainment, music, movies, your favorite color, talk about enything.</div>
 </div>
 <div class="col-md-1 forum-info">
@@ -402,7 +402,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-bolt"></i>
 </div>
-<a href="../View/Forum_list.php?category=intro" class="forum-item-title">Introductions</a>
+<a href="Forum_list.php?category=intro" class="forum-item-title">Introductions</a>
 <div class="forum-sub-title">New to the community? Please stop by, say hi and tell us a bit about yourself. </div>
 </div>
 <div class="col-md-1 forum-info">
@@ -437,7 +437,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-calendar"></i>
 </div>
-<a href="../View/Forum_list.php?category=new" class="forum-item-title">Announcements</a>
+<a href="Forum_list.php?category=new" class="forum-item-title">Announcements</a>
 <div class="forum-sub-title">This forum features announcements from the community staff. If there is a new post in this forum, please check it out. </div>
 </div>
 <div class="col-md-1 forum-info">
@@ -472,7 +472,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-star"></i>
 </div>
-<a href="../View/Forum_list.php?category=staff" class="forum-item-title">Staff Discussion</a>
+<a href="Forum_list.php?category=staff" class="forum-item-title">Staff Discussion</a>
 <div class="forum-sub-title">This forum is for private, staff member only discussions, usually pertaining to the community itself. </div>
 </div>
 <div class="col-md-1 forum-info">
@@ -513,7 +513,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-clock-o"></i>
 </div>
-<a href="../View/Forum_list.php?category=education" class="forum-item-title">Education</a>
+<a href="Forum_list.php?category=education" class="forum-item-title">Education</a>
 <div class="forum-sub-title">Engage in educational discussions: learning, teaching, and academic pursuits for students, teachers, and enthusiasts alike.</div>
 </div>
 <div class="col-md-1 forum-info">
@@ -548,7 +548,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-bomb"></i>
 </div>
-<a href="../View/Forum_list.php?category=gaming" class="forum-item-title">Gaming</a>
+<a href="Forum_list.php?category=gaming" class="forum-item-title">Gaming</a>
 <div class="forum-sub-title"> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the . </div>
 </div>
 <div class="col-md-1 forum-info">
@@ -583,7 +583,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-bookmark"></i>
 </div>
-<a href="../View/Forum_list.php?category=clubs" class="forum-item-title">Clubs</a>
+<a href="Forum_list.php?category=clubs" class="forum-item-title">Clubs</a>
 <div class="forum-sub-title">Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</div>
 </div>
 <div class="col-md-1 forum-info">
@@ -618,7 +618,7 @@ $total_forums2=$total_forums_education + $total_forums_gaming + $total_forums_cl
 <div class="forum-icon">
 <i class="fa fa-ambulance"></i>
 </div>
-<a href="../View/Forum_list.php?category=help" class="forum-item-title">Technical Help</a>
+<a href="Forum_list.php?category=help" class="forum-item-title">Technical Help</a>
 <div class="forum-sub-title">Internet tend to repeat predefined chunks as necessary, making this the</div>
 </div>
 <div class="col-md-1 forum-info">

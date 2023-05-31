@@ -13,13 +13,13 @@
   <body >
     <?php
     session_start();
-    require_once '../Controller/UserController.php';
+    require_once 'UserController.php';
     ?>
     <div class="hero_area">
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+          <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -38,7 +38,7 @@
                 if (isset($_POST["Quit"]))
                 {
                 session_destroy();
-                header('Location: http://localhost/web/View/index.php');
+                header('Location: index.php');
                 exit;
                 }
                 ?>
@@ -47,11 +47,11 @@
                   <li class="nav-item mr-5">
                   <li class="nav-item mr-5">
                   <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                   <span>Profil</span>
                   </a>
                   <?php } else { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                  <a class="nav-link" href="Login.php">
                   <span>Login</span>
                   </a>
                   <?php } ?>
@@ -68,25 +68,25 @@
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="http://localhost/web/View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
                   <?php if ($verif==true) { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                      <a class="nav-link" href="Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="../View/Forum.php">
+                      <a class="nav-link" href="Forum.php">
                           <span>Forum Page</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href="Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -205,7 +205,7 @@
             <div class="about-detail">
               <div class="about_img-container">
                 <div class="about_img-box">
-                  <img src="images/bi3.png" alt="" />
+                <img src="images/bi3.png" alt="" />
                 </div>
               </div>
               <div class="card_detail-ox">

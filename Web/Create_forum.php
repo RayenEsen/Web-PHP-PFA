@@ -40,7 +40,7 @@ body {
 <h4 class="modal-title"><span class="glyphicon glyphicon-envelope"></span> Compose Forum</h4>
 </div>
 <div class="modal-body">
-<form role="form" class="form-horizontal" action="../Controller/UserController.php" method="POST">
+<form role="form" class="form-horizontal" action="UserController.php" method="POST">
     <div class="form-group">
         <label class="col-sm-2" for="inputTo"><span class="glyphicon glyphicon-user"></span> Title</label>
         <div class="col-sm-10"><input type="text" class="form-control" id="inputTo" name="title" placeholder="comma separated list of recipients"></div>
@@ -52,7 +52,7 @@ body {
     <!-- Hidden input field for category -->
     <input type="hidden" name="category" value="<?php echo $_GET['categorie']; ?>">
     <div class="modal-footer">
-        <a href="../View/Forum.php">
+        <a href="Forum.php">
             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
         </a>
         <button type="button" class="btn btn-warning pull-left">Save Draft</button>

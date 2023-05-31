@@ -1,6 +1,6 @@
 <?php
-require_once  '../Model/Connection.php';
-require_once '../Controller/SessionController.php';
+require_once  'Connection.php';
+require_once 'SessionController.php';
 class UserModel
 {
   protected $ID;
@@ -41,7 +41,7 @@ class UserModel
             $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $users;
         } catch(PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }
@@ -54,7 +54,7 @@ class UserModel
             $nb = $stmt->fetchColumn();
             return $nb;
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit();
         }
     }
@@ -73,7 +73,7 @@ class UserModel
               return false;
           }
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit();
         }
     }
@@ -91,7 +91,7 @@ class UserModel
           return false;
         }
       } catch (PDOException $e) {
-        header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+        header("Location: Error404.php?error=" . urlencode($e->getMessage()));
         exit();
       }
     }
@@ -114,11 +114,11 @@ class UserModel
             if ($user !== false) {
                 return $user;
             } else {
-              header("Location: ../View/Profil.php");
+              header("Location: Profil.php");
               exit();
             }
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit();
         }
     }
@@ -134,7 +134,7 @@ class UserModel
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user;
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit();
         }
     }
@@ -149,7 +149,7 @@ class UserModel
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             return $user;
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit();
         }
     } 
@@ -168,7 +168,7 @@ class UserModel
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $users;
       } catch(PDOException $e) {
-        header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+        header("Location: Error404.php?error=" . urlencode($e->getMessage()));
         exit;
       }
     }
@@ -183,9 +183,9 @@ class UserModel
         $query = "INSERT INTO etudiant (ID, FIRST, EMAIL, PWD, PHONE, ABOUT, POSITION, BIRTHDAY, GENDER, STATUS) VALUES ('$cin', '$name', '$email', '$password', '$this->PHONE', '$this->ABOUT', '$this->POSITION', '$this->BIRTHDAY', '$this->GENDER', '$this->STATUS')";
       }
       if ($this->db->query($query)) {
-        header('Location: ../View/Login.php');
+        header('Location: Login.php');
       } else {
-        header('Location: ../View/Register.php');
+        header('Location: Register.php');
       }
     }
     
@@ -199,18 +199,18 @@ public function loginUser($email, $password)
     $user = $result->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-      header('Location: ../View/Login.php');
+      header('Location: Login.php');
     } else {
       $this->ID = $user['ID'];
       $this->FIRST = $user['FIRST'];
       $this->EMAIL = $user['EMAIL'];
       $this->PWD = $user['PWD'];
       Session($this->FIRST, $this->EMAIL, $user['POSITION'], $user['GENDER'], $this->ID, $user['PHONE'], $user['BIRTHDAY'], $user['ABOUT'],$user['status']);
-      header('Location: ../View/Profil.php');
+      header('Location: Profil.php');
     }
     exit();
   } catch (Exception $e) {
-    header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+    header("Location: Error404.php?error=" . urlencode($e->getMessage()));
     exit();
   }
 }
@@ -313,12 +313,12 @@ public function loginUser($email, $password)
         Session($FIRST, $EMAIL, $POSITION, $GENDER, $ID, $PHONE, $BIRTHDAY, $ABOUT, $STATUS);
 
         if ($imgContent !== null || $backgroundContent !== null) {
-          header('Location: ../View/Profil.php');
+          header('Location: Profil.php');
         } else {
-          header('Location: ../View/Profil.php?updated=true');
+          header('Location: Profil.php?updated=true');
         }
       } catch(PDOException $e) {
-        header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+        header("Location: Error404.php?error=" . urlencode($e->getMessage()));
         exit;
       }
     }
@@ -336,9 +336,9 @@ public function loginUser($email, $password)
             $stmt->bindParam(':message', $message);
             $stmt->bindParam(':sender_id', $sender_id);
             $stmt->execute();
-            header('Location: ../View/Chat.php');
+            header('Location: Chat.php');
         } catch(PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }
@@ -361,10 +361,10 @@ public function loginUser($email, $password)
             $stmtStudent->execute();
     
             $this->db->commit();
-            header('Location: ../View/dashboard.php');
+            header('Location: dashboard.php');
           } catch(PDOException $e) {
             $this->db->rollBack();
-            header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+            header("Location: Error404.php?error=" . urlencode($e->getMessage()));
             exit;
         }
     }
@@ -377,7 +377,7 @@ public function loginUser($email, $password)
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result['post_count'];
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }
@@ -405,7 +405,7 @@ public function loginUser($email, $password)
             $forums = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $forums;
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }  
@@ -449,14 +449,14 @@ public function loginUser($email, $password)
                 $stmt2->execute();
                 
                 // Redirect to Forum_list.php with the category parameter
-                header("Location: ../View/Forum_list.php?category=" . urlencode($category));
+                header("Location: Forum_list.php?category=" . urlencode($category));
                 exit;
             } catch (PDOException $e) {
-              header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+              header("Location: Error404.php?error=" . urlencode($e->getMessage()));
               exit;
             }
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }
@@ -470,7 +470,7 @@ public function loginUser($email, $password)
         $nb = $stmt->fetchColumn();
         return $nb;
     } catch (PDOException $e) {
-      header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+      header("Location: Error404.php?error=" . urlencode($e->getMessage()));
       exit();
     }
     }
@@ -484,7 +484,7 @@ public function loginUser($email, $password)
         $nb = $stmt->fetchColumn();
         return $nb;
     } catch (PDOException $e) {
-      header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+      header("Location: Error404.php?error=" . urlencode($e->getMessage()));
       exit();
     }
     }
@@ -499,10 +499,10 @@ public function loginUser($email, $password)
             $stmt->bindParam(':poster_id', $poster_id);
             $stmt->bindParam(':forum_id', $forum_id);
             $stmt->execute();
-            header('Location: ../View/Forum_page.php?ID=' . urlencode($forum_id));
+            header('Location: Forum_page.php?ID=' . urlencode($forum_id));
             exit;
         } catch (PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }    
@@ -516,7 +516,7 @@ public function GetPost($ID)
         $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $posts;
     } catch (PDOException $e) {
-      header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+      header("Location: Error404.php?error=" . urlencode($e->getMessage()));
       exit;
     }
 }
@@ -529,7 +529,7 @@ public function GetPost($ID)
             $stmt->bindParam(':ID', $ID, PDO::PARAM_INT);
             $stmt->execute();
         } catch(PDOException $e) {
-          header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+          header("Location: Error404.php?error=" . urlencode($e->getMessage()));
           exit;
         }
     }
@@ -545,7 +545,7 @@ public function GetPost($ID)
         return $result['View'];
     } catch(PDOException $e) {
         // Redirect to the error page with the error message
-        header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+        header("Location: Error404.php?error=" . urlencode($e->getMessage()));
         exit;
     }
 }
@@ -575,9 +575,9 @@ public function CreateUpvote($Voter_id, $forum_id)
         $stmt->execute();
 
         // Additional code for handling successful insertion if needed
-        header('Location: ../View/Forum_page.php?ID=' . urlencode($forum_id));
+        header('Location: Forum_page.php?ID=' . urlencode($forum_id));
       } catch (PDOException $e) {
-      header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+      header("Location: Error404.php?error=" . urlencode($e->getMessage()));
       exit;
     }
 }
@@ -599,7 +599,7 @@ public function SumUpvotes($forum_id)
 
     return $S;
   } catch (PDOException $e) {
-    header("Location: ../View/Error404.php?error=" . urlencode($e->getMessage()));
+    header("Location: Error404.php?error=" . urlencode($e->getMessage()));
     exit;
   }
 }

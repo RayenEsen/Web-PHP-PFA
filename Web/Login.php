@@ -14,7 +14,7 @@
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+            <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -30,7 +30,7 @@
                 </form>
                 <ul class="navbar-nav  mr-5">
                   <li class="nav-item mr-5">
-                    <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                    <a class="nav-link" href="Login.php">
                       <span>Login</span>
                     </a>
                   </li>
@@ -46,13 +46,13 @@
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="http://localhost/web/View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                  <?php if ($verif==true) { ?>
+                      <a class="nav-link" href="View/Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
@@ -60,11 +60,11 @@
                           <span>Calculator</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href=".Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -80,12 +80,12 @@
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="http://localhost/Web/View/Register.php" class="signup-image-link">Create an account</a>
+                        <a href="Register.php" class="signup-image-link">Create an account</a>
                     </div>
 
                     <div class="signin-form">
                         <h2 class="form-title">Sign In</h2>
-                        <form method="POST" class="register-form" id="login-form" action="/Web/Controller/UserController.php">
+                        <form method="POST" class="register-form" id="login-form" action="UserController.php">
                         <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="email" name="email" id="email" placeholder="Your Email"/>

@@ -8,14 +8,14 @@
 <body>
   <?php
     session_start();
-    require_once "../Controller/UserController.php";
+    require_once "UserController.php";
     $user = $userModel->getUserBy_Id_Name($_SESSION['user_id'],$_SESSION['user_name']); 
   ?>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark"  id="navbar-main">
       <div class="container-fluid">
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="http://localhost/web/View/index.php">ESEN Manouba</a>
-          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" action="/Web/Controller/UserController.php" method="post">
+      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.php">ESEN Manouba</a>
+          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" action="UserController.php" method="post">
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
@@ -34,7 +34,7 @@
                 <?php if (isset($user['PFP'])) { ?>
                 <img id="user-image-2" alt="Default profile picture" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" width="200" height="40">
                 <?php } else { ?>
-                    <img id="user-image-2" alt="Default profile picture" src="../View/images/User.png" width="200" height="40">
+                    <img id="user-image-2" alt="Default profile picture" src="images/User.png" width="200" height="40">
                 <?php } ?>
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
@@ -46,7 +46,7 @@
         </ul>
       </div>
     </nav>
-<form method="post" action="/Web/Controller/UserController.php" enctype="multipart/form-data">   
+<form method="post" action="UserController.php" enctype="multipart/form-data">   
  <!-- Clickable place for background image -->
  <?php if (isset($user['BACKGROUND_IMAGE'])) { ?>
   <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url('data:image/jpeg;base64, <?php echo base64_encode($user['BACKGROUND_IMAGE']); ?>'); background-size: cover; background-position: center top;">
@@ -97,7 +97,7 @@
               <?php if (isset($user['PFP'])) { ?>
               <img id="user-image-1" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" class="rounded-circle" width="200" height="200">
               <?php } else { ?>
-                  <img id="user-image-1" src="../View/images/User.png" class="rounded-circle" width="200" height="200">
+                  <img id="user-image-1" src="images/User.png" class="rounded-circle" width="200" height="200">
               <?php } ?>  
                 <br>
                 <br>

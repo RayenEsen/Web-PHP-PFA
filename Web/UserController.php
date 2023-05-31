@@ -1,7 +1,7 @@
 <?php
 
 // Import the UserModel class
-require_once '../Model/UserModel.php';
+require_once 'UserModel.php';
 $userModel = new UserModel($db);
 
 if (isset($_POST['signup'])) {
@@ -13,7 +13,7 @@ if (isset($_POST['signup'])) {
   if (!empty($name) && !empty($email) && !empty($password) && !empty($cin)) {
     $userModel->registerUser($name, $email, $password, $cin);
   }
-  else header('Location: ../View/Register.php');
+  else header('Location: Register.php');
 }
 
 if (isset($_POST['signin'])) {
@@ -23,7 +23,7 @@ if (isset($_POST['signin'])) {
   if (!empty($email) && !empty($password)) {
     $userModel->LoginUser($email, $password);
   }
-  else header('Location: ../View/Login.php');
+  else header('Location: Login.php');
 
 }
 
@@ -61,7 +61,7 @@ if (isset($_POST['edit'])) {
 if (isset($_POST['search']) || isset($_POST['search2']) || isset($_POST['search3']) || isset($_POST['search4']) || isset($_POST['search5']))
 {
   $FIRST = $_POST['FIRST'];
-  header('Location: ../View/Profil_show.php?FIRST=' . urlencode($FIRST));
+  header('Location: Profil_show.php?FIRST=' . urlencode($FIRST));
 }
 
 
@@ -70,7 +70,7 @@ if (isset($_POST['search']) || isset($_POST['search2']) || isset($_POST['search3
 if (isset($_POST['forum'])) {
   $forum_id = $_POST['forum_id'];
   $userModel->NewView($forum_id);
-  header('Location: ../View/Forum_page.php?ID=' . urlencode($forum_id));
+  header('Location: Forum_page.php?ID=' . urlencode($forum_id));
 }
 
 
@@ -82,7 +82,7 @@ if (isset($_POST['send']))
   if (!empty($message)) {
     $userModel->Insert_Message($_SESSION['user_id'],$message);
   }
-  else header('Location: ../View/Chat.php');
+  else header('Location: Chat.php');
 }
 
 if (isset($_POST['Delete_User']))
@@ -92,7 +92,7 @@ if (isset($_POST['Delete_User']))
   if (!empty($ID)) {
     $userModel->Delete_User($ID);
   }
-  else header('Location: ../View/Dashboard.php');
+  else header('Location: Dashboard.php');
 }
 
 if (isset($_POST['create_forum'])) {
@@ -126,7 +126,7 @@ if (isset($_POST['option']) && isset($_POST['type']) && isset($_POST['category']
   $category = $_POST['category'];
 
   // Redirect to the updated URL
-  $url = "../View/Forum_list.php?category=" . urlencode($category) . "&option=" . urlencode($selectedOption) . "&type=" . urlencode($selectedType);
+  $url = "Forum_list.php?category=" . urlencode($category) . "&option=" . urlencode($selectedOption) . "&type=" . urlencode($selectedType);
   header("Location: " . $url);  
   exit;
 }

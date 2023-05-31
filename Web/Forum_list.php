@@ -34,14 +34,14 @@ a{
 <body>
 <?php 
 session_start();
-require_once "../Controller/UserController.php";
+require_once "UserController.php";
 ?>
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 <div class="hero_area" style="margin-bottom: 40px;">
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+          <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -58,11 +58,11 @@ require_once "../Controller/UserController.php";
                 <ul class="navbar-nav  mr-5">
                 <li class="nav-item mr-5">
                   <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Profil.php">
+                    <a class="nav-link" href="Profil.php">
                   <span>Profil</span>
                   </a>
                   <?php } else { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                    <a class="nav-link" href="Login.php">
                   <span>Login</span>
                   </a>
                   <?php } ?>
@@ -79,25 +79,25 @@ require_once "../Controller/UserController.php";
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="../View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                  <?php if ($verif==true) { ?>
+                      <a class="nav-link" href="Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="../View/Forum.php">
+                      <a class="nav-link" href="Forum.php">
                           <span>Forum Page</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href="Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -115,7 +115,7 @@ require_once "../Controller/UserController.php";
 <div class="row text-left mb-5">
   <div class="col-lg-6 mb-3 mb-sm-0">
     <?php $type = ""; ?>
-    <form action="../Controller/UserController.php" method="post" id="filterForm">
+    <form action="UserController.php" method="post" id="filterForm">
       <div class="dropdown bootstrap-select form-control form-control-lg bg-white bg-op-9 text-sm w-lg-50" style="width: 100%;">
         <select class="form-control form-control-lg bg-white bg-op-9 text-sm w-lg-50" data-toggle="select" tabindex="-98" name="type" onchange="updateType(this.value)">
           <option value="">Type</option>
@@ -216,7 +216,7 @@ foreach ($forums as $forum) {
             <div class="row align-items-center">
                 <div class="col-md-8 mb-3 mb-sm-0">
                     <h5>
-                        <form action="../Controller/UserController.php" method="post" style="display: inline;">
+                        <form action="UserController.php" method="post" style="display: inline;">
                             <input type="hidden" name="forum_id" value="<?php echo $forum["Forum_id"]; ?>">
                             <button type="submit" class="text-primary" name="forum" style="background: none; border: none; padding: 0;">
                                 <?php echo $forum["Title"]; ?>
@@ -270,7 +270,7 @@ foreach ($forums as $forum) {
             <div class="row align-items-center">
                 <div class="col-md-8 mb-3 mb-sm-0">
                     <h5>
-                        <form action="../Controller/UserController.php" method="post" style="display: inline;">
+                        <form action="UserController.php" method="post" style="display: inline;">
                             <input type="hidden" name="forum_id" value="<?php echo $forum["Forum_id"]; ?>">
                             <button type="submit" class="text-primary" name="forum" style="background: none; border: none; padding: 0;">
                                 <?php echo $forum["Title"]; ?>
@@ -326,7 +326,7 @@ foreach ($forums as $forum) {
 
 <div class="col-lg-3 mb-4 mb-lg-0 px-lg-0 mt-lg-0">
 <div style="visibility: hidden; display: none; width: 285px; height: 801px; margin: 0px; float: none; position: static; inset: 85px auto auto;"></div><div data-settings="{&quot;parent&quot;:&quot;#content&quot;,&quot;mind&quot;:&quot;#header&quot;,&quot;top&quot;:10,&quot;breakpoint&quot;:992}" data-toggle="sticky" class="sticky" style="top: 85px;"><div class="sticky-inner">
-<a class="btn btn-lg btn-block btn-success rounded-0 py-4 mb-3 bg-op-6 roboto-bold" href="../View/Create_forum.php?categorie=<?php echo $_GET['category']; ?>">Ask Question</a>
+<a class="btn btn-lg btn-block btn-success rounded-0 py-4 mb-3 bg-op-6 roboto-bold" href="Create_forum.php?categorie=<?php echo $_GET['category']; ?>">Ask Question</a>
 <div class="bg-white mb-3">
 <h4 class="px-3 py-4 op-5 m-0">
 Active Topics

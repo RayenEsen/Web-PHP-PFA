@@ -234,7 +234,7 @@ session_start();
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <?php 
-require_once "../Controller/UserController.php";
+require_once "UserController.php";
 $forum_id = $_GET['ID'];
 $forum = $userModel->getForum($forum_id);
 $posts = $userModel->GetPost($forum_id);
@@ -244,7 +244,7 @@ $posts = $userModel->GetPost($forum_id);
       <header class="header_section">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-            <a class="navbar-brand" href="http://localhost/web/View/index.php">
+          <a class="navbar-brand" href="index.php">
               <span>
                 ESEN
               </span>
@@ -261,11 +261,11 @@ $posts = $userModel->GetPost($forum_id);
                 <ul class="navbar-nav  mr-5">
                 <li class="nav-item mr-5">
                   <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Profil.php">
+                    <a class="nav-link" href="Profil.php">
                   <span>Profil</span>
                   </a>
                   <?php } else { ?>
-                  <a class="nav-link" href="http://localhost/Web/View/Login.php">
+                    <a class="nav-link" href="Login.php">
                   <span>Login</span>
                   </a>
                   <?php } ?>
@@ -282,25 +282,25 @@ $posts = $userModel->GetPost($forum_id);
               </div>
               <div id="myNav" class="overlay">
               <div class="overlay-content">
-              <a href="../View/index.php">Home</a>
+              <a href="index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
-                  <a class="nav-link" href="../View/Profil.php">
+                  <a class="nav-link" href="Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
-                      <a class="nav-link" href="../View/Dashboard.php">
+                  <?php if ($verif==true) { ?>
+                      <a class="nav-link" href="Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="../View/Forum.php">
+                      <a class="nav-link" href="Forum.php">
                           <span>Forum Page</span>
                       </a>
                   <?php } ?>
-                  <a class="nav-link" href="../View/Chat.php">
+                  <a class="nav-link" href="Chat.php">
                       <span>Chat</span>
                   </a>
               <?php } else { ?>
-                  <a class="nav-link" href="../View/Login.php">
+                  <a class="nav-link" href="Login.php">
                       <span>Login</span>
                   </a>
               <?php } ?>
@@ -338,7 +338,7 @@ foreach ($posts as $post) {
                 } else {
                     // If the user doesn't have a profile picture, display the default image
                     ?>
-                    <img alt="Default User Image" src="../View/images/User.png" class="user-image">
+                    <img alt="Default User Image" src="images/User.png" class="user-image">
                 <?php
                 }
                 ?>
@@ -346,7 +346,7 @@ foreach ($posts as $post) {
         </div>
         <div class="col-sm-6">
             <h4>
-            <form id="userForm_<?php echo $user['FIRST']; ?>" action="../Controller/UserController.php" method="post" style="display: inline;">
+            <form id="userForm_<?php echo $user['FIRST']; ?>" action="UserController.php" method="post" style="display: inline;">
               <input type="hidden" name="FIRST" value="<?php echo $user['FIRST'] ?>">
               <a href="#" class="username" onclick="submitForm('<?php echo $user['FIRST'] ?>')"><?php echo $user['FIRST'] ?></a>
               <input type="hidden" name="search5">
@@ -367,7 +367,7 @@ foreach ($posts as $post) {
         </div>
 <div class="col-sm-4" data-no-turbolink>
     <?php if ($i == 1) { ?>
-        <a class="btn btn-info btn-download btn-round pull-right makeLoading" href="../Controller/UserController.php?upvote_id=<?php echo $forum_id; ?>">
+        <a class="btn btn-info btn-download btn-round pull-right makeLoading" href="UserController.php?upvote_id=<?php echo $forum_id; ?>">
             <i class="fa fa-arrow-up"></i> <?php echo $nb_upvotes ?> Upvote
         </a>
     <?php } else { ?>
@@ -384,7 +384,7 @@ foreach ($posts as $post) {
 
 <div class="panel" style="margin-top: 20px;">
     <div class="panel-body">
-        <form action="../Controller/UserController.php" method="post"> 
+        <form action="UserController.php" method="post"> 
             <textarea class="form-control" name="message" rows="2" placeholder="What are you thinking?"></textarea>
             <input type="hidden" name="forum_id" value="<?php echo $forum_id; ?>"> <!-- Add a hidden input field to hold the forum_id value -->
             <div class="mar-top clearfix" style="margin-top: 6px;">

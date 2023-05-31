@@ -36,12 +36,12 @@
             </div>
             <div id="myNav" class="overlay">
             <div class="overlay-content">
-              <a href="http://localhost/web/View/index.php">Home</a>
+            <a href="../View/index.php">Home</a>
               <?php if (!empty($_SESSION['user_id'])) { ?>
                   <a class="nav-link" href="../View/Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
+                  <?php if ($verif==true) { ?>
                       <a class="nav-link" href="../View/Dashboard.php">
                           <span>Dashboard</span>
                       </a>
@@ -82,9 +82,8 @@
 <?php
   $users = $userModel->getUsers();
   foreach ($users as $user) {
-    if ($user['POSITION'] != "Teatcher")
+    if ($verif!=true)
     {
-
 ?>
 <div class="col-xl-3 col-sm-6">
   <div class="card">

@@ -8,15 +8,15 @@
   </head>
 <body>
 <?php
-require_once '../Controller/UserController.php';
+require_once 'UserController.php';
 $FIRST = $_GET['FIRST'];
 $user = $userModel->getUserBy_Id_Name(null,$FIRST);
 ?>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark"  id="navbar-main">
       <div class="container-fluid">
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="http://localhost/web/View/index.php">ESEN Manouba</a>
-          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" action="/Web/Controller/UserController.php" method="post">
+      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.php">ESEN Manouba</a>
+          <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" action="UserController.php" method="post">
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
@@ -120,7 +120,7 @@ $user = $userModel->getUserBy_Id_Name(null,$FIRST);
               </div>
             </div>
             <div class="card-body">
-              <form method="post" action="/Web/Controller/UserController.php">
+              <form method="post" action="UserController.php">
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
