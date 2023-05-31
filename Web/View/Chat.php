@@ -69,8 +69,8 @@
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="">
-                          <span>Calculator</span>
+                      <a class="nav-link" href="../View/Forum_list.php">
+                          <span>Forum Page</span>
                       </a>
                   <?php } ?>
                   <a class="nav-link" href="../View/Chat.php">
@@ -171,72 +171,89 @@ function submitForm(id) {
 </div>
 </div>
 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
-<div class="selected-user">
-<span>Esen: <span class="name">Group Chat</span></span>
-</div>
-<div class="chat-container">
-<ul class="chat-box chatContainerScroll">
-<?php
-require_once '../Controller/UserController.php';
-foreach ($messages as $message) {
-    $id = $message['sender'];
-    $user = $userModel->getUserBy_Id_Name($id,null); 
-    if ($id == $_SESSION['user_id']) {
-?>
-        <li class="chat-right">
-            <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
-            <div class="chat-text"><?= $message['message'] ?></div>
-            <div class="chat-avatar">
+  <div class="selected-user">
+    <span>Esen: <span class="name">Group Chat</span></span>
+  </div>
+  <div class="chat-container">
+    <div class="chat-box chatContainerScroll">
+      <ul class="chat-list">
+        <?php
+        require_once '../Controller/UserController.php';
+        foreach ($messages as $message) {
+          $id = $message['sender'];
+          $user = $userModel->getUserBy_Id_Name($id, null);
+          if ($id == $_SESSION['user_id']) {
+        ?>
+            <li class="chat-right">
+              <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
+              <div class="chat-text"><?= $message['message'] ?></div>
+              <div class="chat-avatar">
                 <?php
-                if (isset($user['PFP']))
-                {
+                if (isset($user['PFP'])) {
                   // If the user has a profile picture
                 ?>
-               <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
+                  <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
                 <?php
-                }
-                else
-                {
+                } else {
                   // If the user doesn't have a profile picture, display the default image
-                  ?>
+                ?>
                   <img src="../View/images/User.png" alt="User Image">
-                  <?php
+                <?php
                 }
                 ?>
                 <div class="chat-name">You</div>
-            </div>
-        </li>
-<?php
-    } else {
-        // Message does not belong to session, show on the left
-?>
-        <li class="chat-left">
-            <div class="chat-avatar">
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
+              </div>
+            </li>
+        <?php
+          } else {
+            // Message does not belong to session, show on the left
+        ?>
+            <li class="chat-left">
+              <div class="chat-avatar">
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" alt="User Image">
                 <div class="chat-name"><?php echo $user['FIRST'] ?></div>
-            </div>
-            <div class="chat-text"><?= $message['message'] ?></div>
-            <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
-        </li>
-<?php
-    }
-}
-?>
-
-
-</ul>
-<form action="../Controller/UserController.php" method="post">
-  <div class="form-group mt-3 mb-0">
-    <textarea class="form-control" rows="3" name="message" placeholder="Type your message here..."></textarea>
+              </div>
+              <div class="chat-text"><?= $message['message'] ?></div>
+              <div class="chat-hour"><?= date("H:i", strtotime($message['Message_timestamp'])) ?> <span class="fa fa-check-circle"></span></div>
+            </li>
+        <?php
+          }
+        }
+        ?>
+      </ul>
+    </div>
+    <form action="../Controller/UserController.php" method="post">
+      <div class="form-group mt-3 mb-0">
+        <textarea class="form-control" rows="3" name="message" placeholder="Type your message here..."></textarea>
+      </div>
+      <div class="form-group mt-3 mb-0">
+        <button type="submit" class="btn btn-primary" name="send">Send</button>
+      </div>
+    </form>
   </div>
-  <div class="form-group mt-3 mb-0">
-    <button type="submit" class="btn btn-primary" name="send">Send</button>
-  </div>
-</form>
+</div>
+
+<style>
+  .chatContainerScroll {
+    overflow-y: auto;
+    max-height: 600px; /* Adjust the max-height value as per your requirement */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  }
+
+  .chatContainerScroll::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+
+  .chat-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+</style>
 
 
-</div>
-</div>
+
 </div>
 
 </div>
@@ -255,6 +272,6 @@ foreach ($messages as $message) {
           .querySelector(".custom_menu-btn")
           .classList.toggle("menu_btn-style");
       }
-    </script>
+</script>
 </body>
 </html>

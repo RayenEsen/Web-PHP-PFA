@@ -45,8 +45,12 @@ $user = $userModel->getUserBy_Id_Name(null,$FIRST);
       </div>
     </nav>
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(images/esen.jpg); background-size: cover; background-position: center top;">
-      <!-- Mask -->
+    <?php if (isset($user['BACKGROUND_IMAGE'])) { ?>
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url('data:image/jpeg;base64, <?php echo base64_encode($user['BACKGROUND_IMAGE']); ?>'); background-size: cover; background-position: center top;">
+    <?php } else { ?>
+      <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(images/esen.jpg); background-size: cover; background-position: center top;">
+    <?php } ?>      
+    <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">

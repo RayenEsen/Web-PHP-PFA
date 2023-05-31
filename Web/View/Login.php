@@ -3,7 +3,6 @@
 <html>
   <head>
     <meta charset="utf-8" />
-
     <title>Sign in</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link href="css/style.css" rel="stylesheet" />

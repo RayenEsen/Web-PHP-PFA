@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -32,22 +31,11 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                <?php
-                if (isset($user['PFP']))
-                {
-                  // If the user has a profile picture
-                ?>
-                <img alt="Default profile picture" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" width="200" height="40"> 
-                <?php
-                }
-                else
-                {
-                  // If the user doesn't have a profile picture, display the default image
-                  ?>
-                  <img alt="Default profile picture" src="../View/images/User.png" width="200" height="40">
-                  <?php
-                }
-                ?>
+                <?php if (isset($user['PFP'])) { ?>
+                <img id="user-image-2" alt="Default profile picture" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" width="200" height="40">
+                <?php } else { ?>
+                    <img id="user-image-2" alt="Default profile picture" src="../View/images/User.png" width="200" height="40">
+                <?php } ?>
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['user_name'] ?></span>
@@ -58,17 +46,46 @@
         </ul>
       </div>
     </nav>
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(images/esen.jpg); background-size: cover; background-position: center top;">
-      <span class="mask bg-gradient-default opacity-8"></span>
-      <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Hello <?php echo $_SESSION['user_name'] ?></h1>
-            <p class="text-white mt-0 mb-5">Personalize your profile page to match your preferences and reflect your unique style This will allow you to Professionally Represent yourself.</p>
-          </div>
-        </div>
+<form method="post" action="/Web/Controller/UserController.php" enctype="multipart/form-data">   
+ <!-- Clickable place for background image -->
+ <?php if (isset($user['BACKGROUND_IMAGE'])) { ?>
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url('data:image/jpeg;base64, <?php echo base64_encode($user['BACKGROUND_IMAGE']); ?>'); background-size: cover; background-position: center top;">
+<?php } else { ?>
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(images/esen.jpg); background-size: cover; background-position: center top;">
+<?php } ?>
+  <span class="mask bg-gradient-default opacity-8"></span>
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white">Hello <?php echo $_SESSION['user_name'] ?></h1>
+        <p class="text-white mt-0 mb-5">Personalize your profile page to match your preferences and reflect your unique style. This will allow you to professionally represent yourself.</p>
       </div>
     </div>
+  </div>
+</div>
+<!-- Hidden file input -->
+<input type="file" id="upload-input" style="display: none;" name="backgroundUpload">
+
+<script>
+  document.querySelector('.header').addEventListener('click', function() {
+    document.getElementById('upload-input').click();
+  });
+
+  document.getElementById('upload-input').addEventListener('change', function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      var backgroundImage = e.target.result;
+      document.querySelector('.header').style.backgroundImage = 'url(' + backgroundImage + ')';
+    };
+
+    reader.readAsDataURL(file);
+  });
+</script>
+<!-- End of Clickable place for background image -->
+
+
     <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -77,23 +94,11 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="#">
-                  <?php
-                if (isset($user['PFP']))
-                {
-                  // If the user has a profile picture
-                ?>
-                  <img id="user-image" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" class="rounded-circle" width="200" height="200">   
-                <?php
-                }
-                else
-                {
-                  // If the user doesn't have a profile picture, display the default image
-                  ?>
-                  <img id="user-image" src="../View/images/User.png" class="rounded-circle" width="200" height="200">   
-
-                  <?php
-                }
-                ?>
+              <?php if (isset($user['PFP'])) { ?>
+              <img id="user-image-1" src="data:image/jpeg;base64,<?php echo base64_encode($user['PFP']); ?>" class="rounded-circle" width="200" height="200">
+              <?php } else { ?>
+                  <img id="user-image-1" src="../View/images/User.png" class="rounded-circle" width="200" height="200">
+              <?php } ?>  
                 <br>
                 <br>
                 <br>
@@ -112,7 +117,6 @@
                   }
                 </style>
                 <br>
-                <form method="post" action="/Web/Controller/UserController.php" enctype="multipart/form-data">
                 <div class="custom-file" style="float: right;">
                     <input type="file" class="btn btn-info" id="imageUpload" name="imageUpload" aria-describedby="inputGroupFileAddon">
                     <label class="btn btn-info" for="imageUpload">Choose file</label>
@@ -215,7 +219,7 @@
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-country">ID</label>
-                        <input name="id" type="text" id="input-country" value="<?php echo $_SESSION['user_id'] ?>" class="form-control form-control-alternative" placeholder="Cin" value="<?php echo $_SESSION['user_id'] ?>">
+                        <input name="id" type="text" id="input-country" readonly value="<?php echo $_SESSION['user_id'] ?>" class="form-control form-control-alternative" placeholder="Cin" value="<?php echo $_SESSION['user_id'] ?>">
                       </div>
                     </div>
                   </div>
@@ -236,6 +240,24 @@
       </div>
     </div>
   </div>
+  <script>
+    document.getElementById("imageUpload").onchange = function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById("user-image-1").src = e.target.result;
+            document.getElementById("user-image-2").src = e.target.result;
+        };
+
+        reader.readAsDataURL(this.files[0]);
+    };
+
+    document.getElementById("profile-picture-form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the form from submitting
+        // Handle the file upload using AJAX or submit the form to UserController.php
+    });
+</script>
+
   <footer class="footer">
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6 m-auto text-center">

@@ -12,7 +12,8 @@
   </head>
   <body >
     <?php
-    session_start()
+    session_start();
+    require_once '../Controller/UserController.php';
     ?>
     <div class="hero_area">
       <header class="header_section">
@@ -28,7 +29,11 @@
               <div
                 class="d-none d-lg-flex ml-auto flex-column flex-lg-row align-items-center mt-3">
                 <form class="form-inline mb-3 mb-lg-0 " method="post">
+                <?php if (!empty($_SESSION['user_id'])) { ?>
                 <button type="submit" name="Quit" class="btn btn-light">Logout</button>
+                <?php
+                }
+                ?>
                 <?php
                 if (isset($_POST["Quit"]))
                 {
@@ -68,13 +73,13 @@
                   <a class="nav-link" href="../View/Profil.php">
                       <span>Profil</span>
                   </a>
-                  <?php if (isset($_SESSION['user_position']) && $_SESSION['user_position'] == "Teatcher") { ?>
+                  <?php if ($verif==true) { ?>
                       <a class="nav-link" href="../View/Dashboard.php">
                           <span>Dashboard</span>
                       </a>
                   <?php } else { ?>
-                      <a class="nav-link" href="">
-                          <span>Calculator</span>
+                      <a class="nav-link" href="../View/Forum.php">
+                          <span>Forum Page</span>
                       </a>
                   <?php } ?>
                   <a class="nav-link" href="../View/Chat.php">
